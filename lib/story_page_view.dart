@@ -356,59 +356,63 @@ class _StoryPageBuilderState extends State<_StoryPageBuilder>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return Stack(
-      fit: StackFit.loose,
-      alignment: Alignment.topLeft,
-      children: [
-        Positioned.fill(
-          child: ColoredBox(
-            color: Theme.of(context).scaffoldBackgroundColor,
+
+    return Directionality(
+      textDirection: TextDirection.rtl,
+      child: Stack(
+        fit: StackFit.loose,
+        alignment: Alignment.topLeft,
+        children: [
+          Positioned.fill(
+            child: ColoredBox(
+              color: Theme.of(context).scaffoldBackgroundColor,
+            ),
           ),
-        ),
-        Positioned.fill(
-          child: widget.itemBuilder(
-            context,
-            widget.pageIndex,
-            context.watch<_StoryStackController>().value,
+          Positioned.fill(
+            child: widget.itemBuilder(
+              context,
+              widget.pageIndex,
+              context.watch<_StoryStackController>().value,
+            ),
           ),
-        ),
-        Container(
-          height: 50,
-          decoration: widget.showShadow
-              ? BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.1),
-                      spreadRadius: 10,
-                      blurRadius: 20,
-                    ),
-                  ],
-                )
-              : null,
-        ),
-        _Indicators(
-          indicatorHeight: widget.indicatorHeight,
-          storyLength: widget.storyLength,
-          animationController: animationController,
-          isCurrentPage: widget.isCurrentPage,
-          isPaging: widget.isPaging,
-          padding: widget.indicatorPadding,
-          indicatorVisitedColor: widget.indicatorVisitedColor,
-          indicatorUnvisitedColor: widget.indicatorUnvisitedColor,
-          indicatorAnimationController: widget.indicatorAnimationController,
-        ),
-        _Gestures(
-          animationController: animationController,
-        ),
-        Positioned.fill(
-          child: widget.gestureItemBuilder?.call(
-                context,
-                widget.pageIndex,
-                context.watch<_StoryStackController>().value,
-              ) ??
-              const SizedBox.shrink(),
-        ),
-      ],
+          Container(
+            height: 50,
+            decoration: widget.showShadow
+                ? BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.1),
+                        spreadRadius: 10,
+                        blurRadius: 20,
+                      ),
+                    ],
+                  )
+                : null,
+          ),
+          _Indicators(
+            indicatorHeight: widget.indicatorHeight,
+            storyLength: widget.storyLength,
+            animationController: animationController,
+            isCurrentPage: widget.isCurrentPage,
+            isPaging: widget.isPaging,
+            padding: widget.indicatorPadding,
+            indicatorVisitedColor: widget.indicatorVisitedColor,
+            indicatorUnvisitedColor: widget.indicatorUnvisitedColor,
+            indicatorAnimationController: widget.indicatorAnimationController,
+          ),
+          _Gestures(
+            animationController: animationController,
+          ),
+          Positioned.fill(
+            child: widget.gestureItemBuilder?.call(
+                  context,
+                  widget.pageIndex,
+                  context.watch<_StoryStackController>().value,
+                ) ??
+                const SizedBox.shrink(),
+          ),
+        ],
+      ),
     );
   }
 
@@ -604,7 +608,7 @@ class _Indicator extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Padding(
-        padding: EdgeInsets.only(left: (index == 0) ? 0 : 4),
+        padding: EdgeInsets.only (right: 4,left: 4),
         child: LinearProgressIndicator(
           value: value,
           backgroundColor: indicatorUnvisitedColor,

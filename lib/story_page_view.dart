@@ -216,7 +216,7 @@ class _StoryPageBuilder extends StatefulWidget {
   final bool isPaging;
   final _StoryItemBuilder itemBuilder;
   final _StoryItemBuilder? gestureItemBuilder;
-  final Duration indicatorDuration;
+    Duration indicatorDuration;
   final EdgeInsetsGeometry indicatorPadding;
   final ValueNotifier<IndicatorAnimationCommand>? indicatorAnimationController;
   final Color indicatorVisitedColor;

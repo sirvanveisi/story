@@ -28,7 +28,7 @@ class StoryPageView extends StatefulWidget {
     this.initialStoryIndex,
     this.initialPage = 0,
     this.onPageLimitReached,
-    this.indicatorDuration = const Duration(seconds: 5),
+    this.indicatorDuration = const  Duration(seconds: 5),
     this.indicatorPadding =
         const EdgeInsets.symmetric(vertical: 32, horizontal: 8),
     this.backgroundColor = Colors.black,
@@ -67,7 +67,7 @@ class StoryPageView extends StatefulWidget {
   final EdgeInsetsGeometry indicatorPadding;
 
   /// duration of [_Indicators]
-  final Duration indicatorDuration;
+    Duration indicatorDuration;
 
   /// Called when the very last story is finished.
   ///
@@ -114,6 +114,8 @@ class _StoryPageViewState extends State<StoryPageView> {
         currentPageValue = pageController!.page;
       });
     });
+
+    // _changeDuration();
   }
 
   @override
@@ -180,10 +182,17 @@ class _StoryPageViewState extends State<StoryPageView> {
       ),
     );
   }
+
+  Future<void> _changeDuration() async {
+    await Future.delayed(Duration(milliseconds: 4000));
+    setState(() {
+      widget.indicatorDuration = Duration(seconds: 20000);
+    });
+  }
 }
 
 class _StoryPageBuilder extends StatefulWidget {
-  const _StoryPageBuilder._({
+    _StoryPageBuilder._({
     Key? key,
     required this.storyLength,
     required this.initialStoryIndex,
